@@ -14,3 +14,8 @@ https://learn.unity.com/tutorial/introduction-to-space-shooter
 
 Font: Galaxy Monkey
 https://www.1001fonts.com/galaxy-monkey-font.html
+
+SFX: ChipTone
+https://sfbgames.itch.io/chiptone
+FreeSound
+https://freesound.org/people/nicorico_120/sounds/752113/
