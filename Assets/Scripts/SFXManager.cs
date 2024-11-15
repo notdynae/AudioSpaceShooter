@@ -10,6 +10,8 @@ public class SFXManager : MonoBehaviour
     public AudioClip playerExplosion;
     public AudioClip BgMusicGameplay;
     public AudioClip BgMusicTitleScreen;
+    public AudioClip ButtonHover;
+    public AudioClip ButtonClick;
 
     private AudioSource SFXaudioSource;
 
@@ -55,18 +57,25 @@ public class SFXManager : MonoBehaviour
     
     public void BGMusicMainMenu()
     {
+        SFXaudioSource.pitch = 1.0f;
         BgMusicAudioSource.clip = BgMusicTitleScreen;
-        BgMusicAudioSource.volume = 0.3f;
+        BgMusicAudioSource.volume = 0.25f;
         BgMusicAudioSource.Play();
     }
 
     public void BGMusicGameplay()
     {
-        BgMusicAudioSource.GetComponent<AudioSource>().clip = BgMusicGameplay;
+        BgMusicAudioSource.clip = BgMusicGameplay;
         BgMusicAudioSource.volume = 0.45f;
         BgMusicAudioSource.Play();
     }
+
+    public void BGMusicPitch(float pitch) {
+        BgMusicAudioSource.pitch = pitch;
+    }
+    
     public void BGMusicStop() {
+        SFXaudioSource.pitch = 1.0f;
         BgMusicAudioSource.Stop();
     }
     public void BGMusicPause() {

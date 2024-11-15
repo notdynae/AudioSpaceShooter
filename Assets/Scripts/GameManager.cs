@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
         shieldText.text = shield.ToString();
 
+        
+        
         if (shield < 0)
         {  
             gameOver = true;            
@@ -76,7 +78,11 @@ public class GameManager : MonoBehaviour
                 GameOverUI.SetActive(false);                
                 break;
 
-            case GameState.Gameplay:                
+            case GameState.Gameplay:         
+                
+                float bgmPitch = (3 - shield) * 0.05f;
+                sfxManager.BGMusicPitch(1 + bgmPitch);
+                
                 MainMenuUI.SetActive(false);
                 GameplayUI.SetActive(true);
                 PausedMenuUI.SetActive(false);
@@ -105,6 +111,7 @@ public class GameManager : MonoBehaviour
                 GameOverUI.SetActive(true);
                 
                 sfxManager.BGMusicStop();
+                sfxManager.BGMusicPitch(1);
                 //ayerDestroy();
                 break;
 
@@ -130,15 +137,8 @@ public class GameManager : MonoBehaviour
     
 
 
-    public void StartGame()
-    {
-        gameState = GameState.Gameplay;
-        shield = 3;
-        score = 0;
-        sfxManager.BGMusicGameplay();
-        SceneManager.LoadScene("Gameplay");
-        player.SetActive(true);        
-        gameOver = false;
+    public void StartGame() {
+        StartCoroutine(DelayStartGame(0.6f));
     }
 
     public void LoadMainMenu()
@@ -154,5 +154,18 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    IEnumerator DelayStartGame(float delayTime)
+    {
+        //Wait for the specified delay time before continuing.
+        yield return new WaitForSeconds(delayTime);
+        //Do the action after the delay time has finished.
+        gameState = GameState.Gameplay;
+        shield = 3;
+        score = 0;
+        sfxManager.BGMusicGameplay();
+        SceneManager.LoadScene("Gameplay");
+        player.SetActive(true);        
+        gameOver = false;
+    }
     
 }
