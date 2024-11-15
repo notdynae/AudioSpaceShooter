@@ -35,9 +35,9 @@ public class SFXManager : MonoBehaviour
     }
 
     //called in the PlayerController Script
-    public void PlayerDamage()
-    {
-        SFXaudioSource.PlayOneShot(playerDamage);
+    public void PlayerDamage() {
+        SFXaudioSource.PlayOneShot(playerDamage, 0.5f);
+
     }
 
     //called in the PlayerController Script
