@@ -20,8 +20,6 @@ public class SFXManager : MonoBehaviour
         SFXaudioSource = GetComponent<AudioSource>();
         //GameObject child = this.transform.Find("BgMusic").gameObject;
         BgMusicAudioSource = gameObject.transform.Find("BgMusic").gameObject.GetComponent<AudioSource>();
-
-
         
         //BgMusicAudioSource.GetComponent<AudioSource>().Play();       
     }
@@ -31,38 +29,50 @@ public class SFXManager : MonoBehaviour
     //called in the PlayerController Script
     public void PlayerShoot()
     {
-        SFXaudioSource.PlayOneShot(playerShoot);
+        SFXaudioSource.pitch = Random.Range(0.9f, 1.1f);
+        SFXaudioSource.PlayOneShot(playerShoot, 0.5f);
     }
 
     //called in the PlayerController Script
     public void PlayerDamage() {
-        SFXaudioSource.PlayOneShot(playerDamage, 0.5f);
-
+        SFXaudioSource.pitch = Random.Range(0.85f, 1.15f);
+        SFXaudioSource.PlayOneShot(playerDamage, 0.45f);
     }
 
     //called in the PlayerController Script
     public void PlayerExplosion()
     {
-        SFXaudioSource.PlayOneShot(playerExplosion);
+        SFXaudioSource.PlayOneShot(playerExplosion, 0.9f);
     }
 
     //called in the AsteroidDestroy script
     public void AsteroidExplosion()
     {
-        SFXaudioSource.PlayOneShot(asteroidExplosion);
+        SFXaudioSource.pitch = Random.Range(0.85f, 1.15f);
+        SFXaudioSource.PlayOneShot(asteroidExplosion, 0.75f);
     }
 
     
     public void BGMusicMainMenu()
     {
         BgMusicAudioSource.clip = BgMusicTitleScreen;
+        BgMusicAudioSource.volume = 0.3f;
         BgMusicAudioSource.Play();
     }
 
     public void BGMusicGameplay()
     {
         BgMusicAudioSource.GetComponent<AudioSource>().clip = BgMusicGameplay;
+        BgMusicAudioSource.volume = 0.45f;
         BgMusicAudioSource.Play();
-
+    }
+    public void BGMusicStop() {
+        BgMusicAudioSource.Stop();
+    }
+    public void BGMusicPause() {
+        BgMusicAudioSource.Pause();
+    }
+    public void BGMusicResume() {
+        BgMusicAudioSource.UnPause();
     }
 }

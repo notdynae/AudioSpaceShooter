@@ -103,6 +103,8 @@ public class GameManager : MonoBehaviour
                 GameplayUI.SetActive(false);
                 PausedMenuUI.SetActive(false);
                 GameOverUI.SetActive(true);
+                
+                sfxManager.BGMusicStop();
                 //ayerDestroy();
                 break;
 
@@ -113,9 +115,11 @@ public class GameManager : MonoBehaviour
                 GameplayUI.SetActive(false);
                 PausedMenuUI.SetActive(true);
                 GameOverUI.SetActive(false);
+                sfxManager.BGMusicPause();
 
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
+                    sfxManager.BGMusicResume();
                     gameState = GameState.Gameplay;
                     Time.timeScale = 1f;
                 }
